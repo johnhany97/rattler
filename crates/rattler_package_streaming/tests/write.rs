@@ -34,7 +34,7 @@ impl Decoder {
     fn open<'a, T: Read>(&'a self, f: &'a mut T) -> tar::Archive<Box<dyn std::io::Read + '_>> {
         match self {
             Decoder::TarBz2 => {
-                let d = bzip2::read::BzDecoder::new(f);
+                let d = bzip2::read::MultiBzDecoder::new(f);
                 tar::Archive::new(Box::new(d))
             }
             Decoder::Zst => {

@@ -8,7 +8,7 @@ use zip::read::read_zipfile_from_stream;
 /// Returns the `.tar.bz2` as a decompressed `tar::Archive`. The `tar::Archive` can be used to
 /// extract the files from it, or perform introspection.
 pub fn stream_tar_bz2(reader: impl Read) -> tar::Archive<impl Read + Sized> {
-    tar::Archive::new(bzip2::read::BzDecoder::new(reader))
+    tar::Archive::new(bzip2::read::MultiBzDecoder::new(reader))
 }
 
 /// Returns the `.tar.zst` as a decompressed `tar` archive. The `tar::Archive` can be used to
